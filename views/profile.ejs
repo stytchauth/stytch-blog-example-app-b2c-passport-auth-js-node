@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h2>Hello, <span id="name"></span></h2>
+
+    <h3>Update profile</h3>
+    <form action="/update-profile" method="POST">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <form action="/logout" method="POST">
+        <button type="submit">Log out</button>
+    </form>
+
+    <script>
+        var user = <%- JSON.stringify(user) %>;
+        var name = user.name.first_name || user.emails[0].email;
+        document.getElementById('name').innerText = name ;
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stytch App</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <div id="errors"></div>
+    <div id="messages"></div>
+    <form action="/login-or-register" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Log in or Register</button>
+    </form>
+
+    <script>
+        var message = <%- JSON.stringify(message) %>;
+        var errors = message.error;
+        if (errors?.length > 0) {
+            var errorsDiv = document.getElementById('errors');
+            errorsDiv.innerHTML = '<ul>' + errors.map(function(error) {
+                return '<li>' + error + '</li>';
+            }).join('') + '</ul>';
+        }
+        var messages = message.info;
+        console.log(messages);
+        if (messages?.length > 0) {
+            var messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '<ul>' + messages.map(function(message) {
+                return '<li>' + message + '</li>';
+            }).join('') + '</ul>';
+        }
+    </script>
+</body>
+</html>
